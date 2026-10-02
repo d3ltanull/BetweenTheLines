@@ -1,0 +1,56 @@
+{
+  "projectTitle": "BETWEEN THE LINES",
+  "filmTitle": "[НАЗВАНИЕ ФИЛЬМА]",
+  "startDate": "2026-09-29T16:20:00",
+  "timezone": "Europe/Moscow",
+  "titleCard": {
+    "fadeIn": "FADE IN",
+    "reelLabel": "REEL 001",
+    "sceneLabel": "SCENE 01",
+    "tagline": "A FILM IN PROGRESS",
+    "name": "[ИМЯ]",
+    "subtitle": "[ПОДЗАГОЛОВОК]",
+    "phrase": "[КОРОТКАЯ ФРАЗА]",
+    "technical": "35MM  •  B/W  •  WORK PRINT"
+  },
+  "copy": {
+    "greetingKicker": "ПРИВЕТСТВИЕ",
+    "dailyTitle": "КАДР ДНЯ",
+    "filmTitle": "НАШ ФИЛЬМ",
+    "unshotTitle": "ЕЩЁ НЕ СНЯТО",
+    "unshotLine": "[СЦЕНА ЕЩЁ НЕ СНЯТА]",
+    "unshotNote": "История продолжается. Финальных титров пока нет.",
+    "counterRunning": "НАШ ФИЛЬМ ИДЁТ УЖЕ",
+    "counterWaiting": "ДО ПЕРВОГО КАДРА",
+    "fadeOut": "FADE OUT",
+    "endCard": "THE END IS NOT YET WRITTEN",
+    "missingImage": "[КАДР ПОКА НЕ ДОБАВЛЕН]",
+    "missingText": "[ТЕКСТ ПОКА НЕ ДОБАВЛЕН]",
+    "missingQuote": "[ЦИТАТА ПОКА НЕ ДОБАВЛЕНА]",
+    "soundOn": "SOUND ON",
+    "soundOff": "SOUND OFF",
+    "soundUnavailable": "SOUND — NO REEL"
+  },
+  "effects": {
+    "grain": 0.11,
+    "flicker": 0.035,
+    "scratches": 0.07,
+    "jitter": 0.28,
+    "ripple": 0.025,
+    "dust": 0.6,
+    "speed": 1
+  },
+  "audio": {
+    "src": "",
+    "loop": true,
+    "volume": 0.32
+  },
+  "features": {
+    "filmEffects": true,
+    "sideReels": true,
+    "audio": true,
+    "unshotScene": true,
+    "introFade": true,
+    "scrollReveal": true
+  }
+}

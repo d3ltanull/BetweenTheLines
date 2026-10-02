@@ -1,0 +1,49 @@
+{
+  "scenes": [
+    {
+      "id": "scene-01",
+      "number": 1,
+      "date": "2026-09-29",
+      "time": "16:20",
+      "title": "[НАЗВАНИЕ СЦЕНЫ]",
+      "location": "[МЕСТО]",
+      "description": "[ОПИСАНИЕ]",
+      "quote": "[ЦИТАТА]",
+      "voiceOver": "[ЗАКАДРОВЫЙ ТЕКСТ]",
+      "notes": "[ЗАМЕТКИ]",
+      "image": null,
+      "imageAlt": "[ОПИСАНИЕ КАДРА]",
+      "metadata": {
+        "reel": "001",
+        "take": "[ТЕЙК]"
+      }
+    },
+    {
+      "id": "scene-02",
+      "number": 2,
+      "date": "2026-09-30",
+      "time": "19:40",
+      "title": "[НАЗВАНИЕ СЦЕНЫ]",
+      "location": "[МЕСТО]",
+      "description": "[ОПИСАНИЕ]",
+      "quote": "[ЦИТАТА]",
+      "voiceOver": "[ЗАКАДРОВЫЙ ТЕКСТ]",
+      "notes": null,
+      "image": null,
+      "imageAlt": "[ОПИСАНИЕ КАДРА]"
+    },
+    {
+      "id": "scene-03",
+      "number": 3,
+      "date": "2026-10-01",
+      "time": "11:05",
+      "title": "[НАЗВАНИЕ СЦЕНЫ]",
+      "location": "[МЕСТО]",
+      "description": "[ОПИСАНИЕ]",
+      "quote": "[ЦИТАТА]",
+      "voiceOver": "[ЗАКАДРОВЫЙ ТЕКСТ]",
+      "image": "assets/images/timeline/missing-demo.jpg",
+      "imageAlt": "[ОПИСАНИЕ КАДРА]"
+    }
+  ]
+}

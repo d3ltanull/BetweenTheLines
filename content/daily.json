@@ -1,0 +1,41 @@
+{
+  "default": {
+    "type": "text",
+    "kicker": "TODAY'S FRAME",
+    "title": "[КАДР ДНЯ]",
+    "image": null,
+    "imageAlt": "[ОПИСАНИЕ ИЗОБРАЖЕНИЯ]",
+    "text": "[ТЕКСТ КАДРА ДНЯ]",
+    "extra": "[ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ]",
+    "quote": null
+  },
+  "entries": [
+    {
+      "date": "2026-09-29",
+      "type": "text",
+      "kicker": "TODAY'S FRAME",
+      "title": "[КАДР ДНЯ]",
+      "image": null,
+      "imageAlt": "[ОПИСАНИЕ ИЗОБРАЖЕНИЯ]",
+      "text": "[ТЕКСТ КАДРА ДНЯ]",
+      "extra": "[ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ]"
+    },
+    {
+      "date": "2099-01-01",
+      "type": "quiz",
+      "kicker": "A SMALL INTERMISSION",
+      "title": "[КАДР ДНЯ]",
+      "text": "[ТЕКСТ КАДРА ДНЯ]",
+      "extra": "[ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ]",
+      "quiz": {
+        "question": "[ВОПРОС]",
+        "options": [
+          { "id": "a", "text": "[ВАРИАНТ А]", "correct": false },
+          { "id": "b", "text": "[ВАРИАНТ Б]", "correct": true },
+          { "id": "c", "text": "[ВАРИАНТ В]", "correct": false }
+        ],
+        "reveal": "[ПОЯСНЕНИЕ]"
+      }
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c0c0b">
+  <meta name="description" content="BETWEEN THE LINES — a film in progress.">
+  <title>BETWEEN THE LINES</title>
+  <link rel="icon" href="assets/images/decorative/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">К содержанию</a>
+
+  <div class="intro-veil" id="intro-veil" aria-hidden="true">
+    <p class="intro-veil__mark type-tech">FADE IN</p>
+  </div>
+
+  <div class="film-reels" id="film-reels" aria-hidden="true">
+    <div class="film-reel film-reel--left"><div class="film-reel__track"></div></div>
+    <div class="film-reel film-reel--right"><div class="film-reel__track"></div></div>
+  </div>
+
+  <div class="film-fx" id="film-fx" aria-hidden="true">
+    <div class="film-fx__grain"></div>
+    <div class="film-fx__flicker"></div>
+    <div class="film-fx__scratches"></div>
+    <div class="film-fx__dust"></div>
+    <div class="film-fx__vignette"></div>
+  </div>
+
+  <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="false">
+    <span class="sound-toggle__label">SOUND OFF</span>
+  </button>
+
+  <audio id="score" preload="none"></audio>
+
+  <div class="page">
+    <header class="title-card" id="title-card">
+      <p class="title-card__cue type-tech" data-bind="fadeIn">FADE IN</p>
+      <p class="title-card__meta type-tech">
+        <span data-bind="reelLabel">REEL 001</span>
+        <span class="dot" aria-hidden="true">·</span>
+        <span data-bind="sceneLabel">SCENE 01</span>
+      </p>
+      <h1 class="title-card__title" data-bind="projectTitle">BETWEEN THE LINES</h1>
+      <p class="title-card__tagline" data-bind="tagline">A FILM IN PROGRESS</p>
+      <div class="title-card__cast">
+        <p class="title-card__name" data-bind="name">[ИМЯ]</p>
+        <p class="title-card__subtitle" data-bind="subtitle">[ПОДЗАГОЛОВОК]</p>
+        <p class="title-card__phrase" data-bind="phrase">[КОРОТКАЯ ФРАЗА]</p>
+      </div>
+      <p class="title-card__tech type-tech" data-bind="technical">35MM  •  B/W  •  WORK PRINT</p>
+    </header>
+
+    <main id="main">
+      <section class="chapter greeting" id="greeting" aria-labelledby="greeting-heading">
+        <p class="chapter__kicker type-tech" id="greeting-heading" data-bind="greetingKicker">ПРИВЕТСТВИЕ</p>
+        <p class="greeting__date type-tech" id="greeting-date">[ДАТА]</p>
+        <h2 class="greeting__text" id="greeting-text">[ПРИВЕТСТВИЕ]</h2>
+        <p class="greeting__phrase" id="greeting-phrase">[КОРОТКАЯ ФРАЗА]</p>
+        <p class="greeting__note" id="greeting-note">[ДОПОЛНИТЕЛЬНАЯ СТРОКА]</p>
+      </section>
+
+      <section class="chapter daily" id="daily" aria-labelledby="daily-heading">
+        <p class="chapter__kicker type-tech" id="daily-heading">КАДР ДНЯ</p>
+        <article class="daily__frame" id="daily-frame">
+          <p class="placeholder">[КАДР ДНЯ]</p>
+        </article>
+      </section>
+
+      <section class="chapter film" id="film" aria-labelledby="film-heading">
+        <header class="film__header">
+          <p class="chapter__kicker type-tech">CONTINUITY</p>
+          <h2 class="film__title" id="film-heading">НАШ ФИЛЬМ</h2>
+          <p class="film__lead" id="film-lead">[НАЗВАНИЕ ФИЛЬМА]</p>
+        </header>
+        <ol class="timeline" id="timeline"></ol>
+      </section>
+
+      <section class="chapter counter" id="counter" aria-labelledby="counter-heading">
+        <h2 class="counter__title" id="counter-heading">НАШ ФИЛЬМ ИДЁТ УЖЕ</h2>
+        <p class="counter__status type-tech" id="counter-status"></p>
+        <div class="counter__grid" role="timer" aria-live="polite" aria-atomic="true" id="counter-grid">
+          <div class="counter__cell">
+            <span class="counter__value" id="count-days">000</span>
+            <span class="counter__unit">ДНИ</span>
+          </div>
+          <div class="counter__cell">
+            <span class="counter__value" id="count-hours">00</span>
+            <span class="counter__unit">ЧАСЫ</span>
+          </div>
+          <div class="counter__cell">
+            <span class="counter__value" id="count-minutes">00</span>
+            <span class="counter__unit">МИН</span>
+          </div>
+          <div class="counter__cell">
+            <span class="counter__value" id="count-seconds">00</span>
+            <span class="counter__unit">СЕК</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="end-card" id="end-card">
+      <p class="end-card__cue type-tech">FADE OUT</p>
+      <p class="end-card__line">THE END IS NOT YET WRITTEN</p>
+    </footer>
+  </div>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>
