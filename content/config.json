@@ -41,7 +41,7 @@
     "speed": 1
   },
   "audio": {
-    "src": "",
+    "src": "assets/audio/score.mp3",
     "loop": true,
     "volume": 0.32
   },
