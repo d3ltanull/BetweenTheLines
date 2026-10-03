@@ -51,7 +51,6 @@
       <div class="title-card__cast">
         <p class="title-card__name" data-bind="name">[ИМЯ]</p>
         <p class="title-card__subtitle" data-bind="subtitle">[ПОДЗАГОЛОВОК]</p>
-        <p class="title-card__phrase" data-bind="phrase">[КОРОТКАЯ ФРАЗА]</p>
       </div>
       <p class="title-card__tech type-tech" data-bind="technical">35MM  •  B/W  •  WORK PRINT</p>
     </header>
@@ -74,40 +73,39 @@
 
       <section class="chapter film" id="film" aria-labelledby="film-heading">
         <header class="film__header">
-          <p class="chapter__kicker type-tech">CONTINUITY</p>
+          <p class="chapter__kicker type-tech">ХРОНИКА СОБЫТИЙ</p>
           <h2 class="film__title" id="film-heading">НАШ ФИЛЬМ</h2>
-          <p class="film__lead" id="film-lead">[НАЗВАНИЕ ФИЛЬМА]</p>
         </header>
         <ol class="timeline" id="timeline"></ol>
       </section>
 
       <section class="chapter counter" id="counter" aria-labelledby="counter-heading">
-        <h2 class="counter__title" id="counter-heading">НАШ ФИЛЬМ ИДЁТ УЖЕ</h2>
+        <h2 class="counter__title" id="counter-heading">[НАШ ФИЛЬМ ИДЁТ УЖЕ]</h2>
         <p class="counter__status type-tech" id="counter-status"></p>
         <div class="counter__grid" role="timer" aria-live="polite" aria-atomic="true" id="counter-grid">
           <div class="counter__cell">
             <span class="counter__value" id="count-days">000</span>
-            <span class="counter__unit">ДНИ</span>
+            <span class="counter__unit">ДНЕЙ</span>
           </div>
           <div class="counter__cell">
             <span class="counter__value" id="count-hours">00</span>
-            <span class="counter__unit">ЧАСЫ</span>
+            <span class="counter__unit">ЧАСОВ</span>
           </div>
           <div class="counter__cell">
             <span class="counter__value" id="count-minutes">00</span>
-            <span class="counter__unit">МИН</span>
+            <span class="counter__unit">МИНУТ</span>
           </div>
           <div class="counter__cell">
             <span class="counter__value" id="count-seconds">00</span>
-            <span class="counter__unit">СЕК</span>
+            <span class="counter__unit">СЕКУНД</span>
           </div>
         </div>
       </section>
     </main>
 
     <footer class="end-card" id="end-card">
-      <p class="end-card__cue type-tech">FADE OUT</p>
       <p class="end-card__line">THE END IS NOT YET WRITTEN</p>
+      <p class="end-card__cue type-tech">FADE OUT</p>
     </footer>
   </div>
 

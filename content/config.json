@@ -1,6 +1,6 @@
 {
-  "projectTitle": "BETWEEN THE LINES",
-  "filmTitle": "[НАЗВАНИЕ ФИЛЬМА]",
+  "projectTitle": "МЕЖДУ СТРОК",
+  "filmTitle": "МЕЖДУ СТРОК",
   "startDate": "2026-09-29T16:20:00",
   "timezone": "Europe/Moscow",
   "titleCard": {
@@ -8,9 +8,9 @@
     "reelLabel": "REEL 001",
     "sceneLabel": "SCENE 01",
     "tagline": "A FILM IN PROGRESS",
-    "name": "[ИМЯ]",
-    "subtitle": "[ПОДЗАГОЛОВОК]",
-    "phrase": "[КОРОТКАЯ ФРАЗА]",
+    "name": "„О КРАСОТЕ. О ВСТРЕЧАХ. О ТОМ, ЧТО ОТСАЕТСЯ МЕЖДУ СТРОК.“",
+    "subtitle": "ПЛАТОН, «ПИР»",
+    "phrase": "*рекомендуется включить звуковое сопровождение",
     "technical": "35MM  •  B/W  •  WORK PRINT"
   },
   "copy": {
@@ -20,10 +20,10 @@
     "unshotTitle": "ЕЩЁ НЕ СНЯТО",
     "unshotLine": "[СЦЕНА ЕЩЁ НЕ СНЯТА]",
     "unshotNote": "История продолжается. Финальных титров пока нет.",
-    "counterRunning": "НАШ ФИЛЬМ ИДЁТ УЖЕ",
+    "counterRunning": "ХРОНОМЕТРАЖ ФИЛЬМА",
     "counterWaiting": "ДО ПЕРВОГО КАДРА",
     "fadeOut": "FADE OUT",
-    "endCard": "THE END IS NOT YET WRITTEN",
+    "endCard": "ПРОДОЛЖЕНИЕ СЛЕДУЕТ",
     "missingImage": "[КАДР ПОКА НЕ ДОБАВЛЕН]",
     "missingText": "[ТЕКСТ ПОКА НЕ ДОБАВЛЕН]",
     "missingQuote": "[ЦИТАТА ПОКА НЕ ДОБАВЛЕНА]",

@@ -2,8 +2,8 @@
   "use strict";
 
   const FALLBACK_CONFIG = {
-    projectTitle: "BETWEEN THE LINES",
-    filmTitle: "[НАЗВАНИЕ ФИЛЬМА]",
+    projectTitle: "МЕЖДУ СТРОК",
+    filmTitle: "МЕЖДУ СТРОК",
     startDate: "2026-09-29T16:20:00",
     timezone: "Europe/Moscow",
     titleCard: {
@@ -17,7 +17,7 @@
       technical: "35MM  •  B/W  •  WORK PRINT"
     },
     copy: {
-      greetingKicker: "ПРИВЕТСТВИЕ",
+      greetingKicker: "КАДР ДНЯ",
       dailyTitle: "КАДР ДНЯ",
       filmTitle: "НАШ ФИЛЬМ",
       unshotTitle: "ЕЩЁ НЕ СНЯТО",

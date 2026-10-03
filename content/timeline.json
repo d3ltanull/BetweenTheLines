@@ -4,33 +4,31 @@
       "id": "scene-01",
       "number": 1,
       "date": "2026-09-29",
-      "time": "16:20",
-      "title": "ПЕРВЫЙ КАДР",
-      "location": "[МЕСТО]",
-      "description": "[ОПИСАНИЕ]",
-      "quote": "[ЦИТАТА]",
-      "voiceOver": "[ЗАКАДРОВЫЙ ТЕКСТ]",
-      "notes": "[ЗАМЕТКИ]",
-      "image": null,
+      "time": "21:53",
+      "title": "«ПЕРВЫЙ ДУБЛЬ»",
+      "location": "Сквер профессора Попова",
+      "description": "Парк. Вечер. Александр Степанович за всем наблюдал. Первая попытка установить связь. Сигнал оказался слабым, но помехи были приятными.",
+      "quote": "„Пойми, я за естественность, а это было не очень естественно...“",
+      "voiceOver": null,
+      "notes": "*любимый цвет - синий",
+      "image": "assets/images/timeline/event_1.jpg",
       "imageAlt": "[ОПИСАНИЕ КАДРА]",
-      "metadata": {
-        "reel": "001",
-        "take": "[ТЕЙК]"
-      }
+      "metadata": null
     },
     {
       "id": "scene-02",
       "number": 2,
       "date": "2026-10-01",
       "time": "23:20",
-      "title": "ПО ТУ СТОРОНУ ПРОВОДА",
-      "location": "ДОМ",
-      "description": "[ОПИСАНИЕ]",
-      "quote": "[ЦИТАТА]",
-      "voiceOver": "[ЗАКАДРОВЫЙ ТЕКСТ]",
-      "notes": null,
-      "image": null,
-      "imageAlt": "[ОПИСАНИЕ КАДРА]"
+      "title": "«ПО ТУ СТОРОНУ ПРОВОДА»",
+      "location": "Дом",
+      "description": "Описание",
+      "quote": "„Цитата“",
+      "voiceOver": null,
+      "notes": "*заметка",
+      "image": "assets/images/timeline/event_2.jpg",
+      "imageAlt": "[ОПИСАНИЕ КАДРА]",
+      "metadata": null
     }
   ]
 }
