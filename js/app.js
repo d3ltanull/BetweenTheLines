@@ -265,13 +265,22 @@
       btn.textContent = textOr(opt.text, "[ВАРИАНТ]");
       btn.addEventListener("click", () => {
         if (answered) return;
-        answered = true;
-        btn.classList.add("is-chosen");
-        if (opt.correct) btn.classList.add("is-correct");
-        list.querySelectorAll("button").forEach((b) => {
-          b.disabled = true;
-        });
-        reveal.classList.remove("is-hidden");
+
+        if (opt.correct) {
+          answered = true;
+          btn.classList.add("is-correct");
+
+          list.querySelectorAll("button").forEach((b) => {
+            b.disabled = true;
+          });
+
+          reveal.textContent = textOr(quiz.reveal, copy.missingText);
+          reveal.classList.remove("is-hidden");
+        } else {
+          btn.classList.add("is-wrong");
+          reveal.textContent = "Подумай ещё";
+          reveal.classList.remove("is-hidden");
+        }
       });
       li.appendChild(btn);
       list.appendChild(li);

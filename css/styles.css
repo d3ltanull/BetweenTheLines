@@ -520,7 +520,15 @@ body.fx-ripple .page {
 }
 
 .quiz__option.is-correct {
-  border-color: var(--paper-deep);
+  border-color: #6f8f72;
+  background: #6f8f72;
+  color: var(--paper);
+}
+
+.quiz__option.is-wrong {
+  border-color: #9a5f5f;
+  background: #9a5f5f;
+  color: var(--paper);
 }
 
 .quiz__reveal {

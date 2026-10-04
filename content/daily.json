@@ -10,11 +10,11 @@
   },
   "entries": [
     {
-      "date": "2026-10-05",
+      "date": "2026-10-11ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
       "type": "text",
       "kicker": "NO. 01",
       "title": "Фотокарточка",
-      "image": "assets/images/daily/meme_1.jpg",
+      "image": "assets/images/daily/meme_3.jpg",
       "imageAlt": "Тут должна быть фотокарточка, но Андрей накосячил",
       "text": "«Некоторые сны не заканчиваются с пробуждением»",
       "extra": null,
@@ -24,29 +24,40 @@
       "date": "2026-10-06",
       "type": "text",
       "kicker": "NO. 02",
-      "title": "Приятность",
+      "title": "Интересный факт!",
       "image": null,
       "imageAlt": "Тут должна быть фотокарточка, но Андрей накосячил",
-      "text": "",
+      "text": "Знаешь ли ты, что «катарсис» - это слово из греческой трагедии? Аристотель использовал его, говоря о том, как трагическое искусство через страх и сострадание способно очищать зрителя. Получается, хороший фильм умеет сделать с нами примерно то же, что когда-то делал древнегреческий театр.",
       "extra": null,
       "quote": null
     },
     {
       "date": "2026-10-07",
       "type": "quiz",
-      "kicker": "A SMALL INTERMISSION",
+      "kicker": "NO. 04",
       "title": "КиноКвиз!",
       "text": "Посмотрим, как хорошо ты знаешь советскую классику",
       "extra": "Решишь правильно - с меня презент",
       "quiz": {
-        "question": "[ВОПРОС]",
+        "question": "*ВОПРОС",
         "options": [
-          { "id": "a", "text": "[ВАРИАНТ А]", "correct": false },
-          { "id": "b", "text": "[ВАРИАНТ Б]", "correct": true },
-          { "id": "c", "text": "[ВАРИАНТ В]", "correct": false }
+          { "id": "a", "text": "*ВАРИАНТ А", "correct": false },
+          { "id": "b", "text": "*ВАРИАНТ Б", "correct": true },
+          { "id": "c", "text": "*ВАРИАНТ В", "correct": false }
         ],
-        "reveal": "[ПОЯСНЕНИЕ]"
+        "reveal": "Умница! Забрать награду можно будет при следующей встрече"
       }
+    },
+    {
+      "date": "2026-10-05",
+      "type": "text",
+      "kicker": "NO. 03",
+      "title": "Фотокарточка",
+      "image": "assets/images/daily/meme_2.jpg",
+      "imageAlt": "Тут должна быть фотокарточка, но Андрей накосячил",
+      "text": "Да, это все. Надеюсь, ты улыбнулась",
+      "extra": null,
+      "quote": null
     }
   ]
 }
