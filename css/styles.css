@@ -14,7 +14,7 @@
   --font-tech: "Special Elite", "Courier New", monospace;
 
   --page-pad: clamp(1.25rem, 4vw, 3.5rem);
-  --reel-width: 44px;
+  --reel-height: 36px;
   --max-read: 42rem;
 
   --grain: 0.11;
@@ -37,15 +37,15 @@
 html {
   background: var(--ink);
   color: var(--paper);
-  scroll-behavior: smooth;
-  overflow-x: hidden;
+  scroll-behavior: auto;
+  overflow-x: clip;
   max-width: 100%;
 }
 
 body {
   margin: 0;
   min-height: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   font-family: var(--font-body);
   font-size: 1.125rem;
   line-height: 1.65;
@@ -111,7 +111,8 @@ button {
   z-index: 2;
   width: 100%;
   max-width: 100%;
-  padding-inline: max(var(--page-pad), calc(var(--reel-width) + 1.25rem));
+  padding-inline: var(--page-pad);
+  padding-block: var(--reel-height);
   animation: page-jitter calc(7.5s / var(--fx-speed)) steps(2, end) infinite;
 }
 
@@ -153,52 +154,52 @@ button {
 
 .film-reel {
   position: absolute;
-  top: -8%;
-  width: var(--reel-width);
-  height: 120%;
+  left: -8%;
+  width: 120%;
+  height: var(--reel-height);
   background:
     repeating-linear-gradient(
-      to bottom,
+      to right,
       #1a1916 0 22px,
       #121110 22px 56px
     );
   box-shadow: inset 0 0 0 1px #2e2c28;
 }
 
-.film-reel--left {
-  left: 0;
-  border-right: 1px solid #3a372f;
+.film-reel--top {
+  top: 0;
+  border-bottom: 1px solid #3a372f;
 }
 
-.film-reel--right {
-  right: 0;
-  border-left: 1px solid #3a372f;
+.film-reel--bottom {
+  bottom: 0;
+  border-top: 1px solid #3a372f;
 }
 
 .film-reel__track {
-  height: 200%;
+  width: 200%;
+  height: 100%;
   background:
     repeating-linear-gradient(
-      to bottom,
+      to right,
       transparent 0 14px,
       transparent 14px 18px
     ),
     repeating-linear-gradient(
-      to bottom,
+      to right,
       #0a0a09 0 10px,
       transparent 10px 28px
     );
-  background-size: 100% 100%, 11px 28px;
-  background-repeat: no-repeat, repeat-y;
-  background-position: 0 0, 8px 0;
+  background-size: 100% 100%, 28px 11px;
+  background-repeat: no-repeat, repeat-x;
+  background-position: 0 0, 0 8px;
   animation: reel-crawl calc(42s / var(--fx-speed)) linear infinite;
   opacity: 0.9;
 }
 
-.film-reel--right .film-reel__track {
-  background-position: 0 0, 25px 0;
+.film-reel--bottom .film-reel__track {
+  background-position: 0 0, 0 25px;
   animation-duration: calc(48s / var(--fx-speed));
-  animation-direction: reverse;
 }
 
 .film-reel::after {
@@ -207,7 +208,7 @@ button {
   inset: 0;
   background:
     repeating-linear-gradient(
-      to bottom,
+      to right,
       transparent 0 36px,
       rgba(230, 223, 209, 0.05) 36px 37px
     );
@@ -280,8 +281,8 @@ body.fx-ripple .page {
 /* Sound */
 .sound-toggle {
   position: fixed;
-  top: 1.1rem;
-  right: max(1.1rem, calc(var(--reel-width) + 0.75rem));
+  top: calc(var(--reel-height) + 0.75rem);
+  right: 1.1rem;
   z-index: 30;
   border: 1px solid var(--hairline);
   background: rgba(12, 12, 11, 0.72);
@@ -801,8 +802,8 @@ body.fx-ripple .page {
 }
 
 @keyframes reel-crawl {
-  from { transform: translateY(0); }
-  to { transform: translateY(-28px); }
+  from { transform: translateX(0); }
+  to { transform: translateX(-28px); }
 }
 
 @keyframes grain-shift {
@@ -880,7 +881,7 @@ body.fx-ripple .page {
 
 @media (max-width: 900px) {
   :root {
-    --reel-width: 0px;
+    --reel-height: 26px;
     --grain: 0.06;
     --flicker: 0.018;
     --scratches: 0.03;
@@ -888,16 +889,17 @@ body.fx-ripple .page {
     --dust: 0.28;
   }
 
-  .film-reels {
-    display: none;
-  }
-
   .sound-toggle {
     right: 0.85rem;
   }
 
-  .page {
-    padding-inline: var(--page-pad);
+  .film-reel__track {
+    background-size: 100% 100%, 28px 8px;
+    background-position: 0 0, 0 5px;
+  }
+
+  .film-reel--bottom .film-reel__track {
+    background-position: 0 0, 0 13px;
   }
 
   .timeline::before {

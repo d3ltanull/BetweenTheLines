@@ -17,7 +17,6 @@
       technical: "35MM  •  B/W  •  WORK PRINT"
     },
     copy: {
-      greetingKicker: "КАДР ДНЯ",
       dailyTitle: "КАДР ДНЯ",
       filmTitle: "НАШ ФИЛЬМ",
       unshotTitle: "ЕЩЁ НЕ СНЯТО",
@@ -185,8 +184,7 @@
       name: card.name,
       subtitle: card.subtitle,
       phrase: card.phrase,
-      technical: card.technical,
-      greetingKicker: config.copy.greetingKicker
+      technical: card.technical
     };
     document.querySelectorAll("[data-bind]").forEach((el) => {
       const key = el.getAttribute("data-bind");
