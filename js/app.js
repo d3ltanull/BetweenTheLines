@@ -422,7 +422,6 @@
     card.className = "scene-card";
     const head = document.createElement("div");
     head.className = "scene-card__head";
-    head.innerHTML = "<span>CONTINUED</span><span>—</span><span>—</span>";
     const title = document.createElement("h3");
     title.className = "scene-card__title";
     title.textContent = config.copy.unshotTitle;
