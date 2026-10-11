@@ -59,6 +59,21 @@
       "video": "assets/video/video_1.mov",
       "imageAlt": "[ОПИСАНИЕ КАДРА]",
       "metadata": null
+    },
+    {
+      "id": "scene-05",
+      "number": 5,
+      "date": "2026-10-09",
+      "time": "20:35",
+      "title": "«ЕСТЬ КОНТАКТ!»",
+      "location": "Кинотеатр",
+      "description": "",
+      "quote": null,
+      "voiceOver": null,
+      "notes": null,
+      "image": "assets/images/timeline/event_4.jpg",
+      "imageAlt": "[ОПИСАНИЕ КАДРА]",
+      "metadata": null
     }
   ]
 }

@@ -903,6 +903,10 @@ body.fx-ripple .page {
     --jitter: 0.12;
     --dust: 0.28;
   }
+  
+  .page {
+    animation: none;
+  }
 
   .sound-toggle {
     right: 0.85rem;

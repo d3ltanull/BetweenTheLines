@@ -24,6 +24,17 @@
       "date": "2026-10-29",
       "type": "text",
       "kicker": "NO. 02",
+      "title": "Поздравляю!",
+      "image": "assets/images/daily/meme_3.jpg",
+      "imageAlt": "Тут должна быть фотокарточка, но Андрей накосячил",
+      "text": "«Некоторые сны не заканчиваются с пробуждением»",
+      "extra": null,
+      "quote": null
+    },
+    {
+      "date": "2026-10-30",
+      "type": "text",
+      "kicker": "NO. 03",
       "title": "Интересный факт!",
       "image": null,
       "imageAlt": "Тут должна быть фотокарточка, но Андрей накосячил",
@@ -32,7 +43,7 @@
       "quote": null
     },
     {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "type": "quiz",
       "kicker": "NO. 04",
       "title": "КиноКвиз!",
@@ -49,9 +60,9 @@
       }
     },
     {
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "type": "text",
-      "kicker": "NO. 03",
+      "kicker": "NO. 05",
       "title": "Фотокарточка",
       "image": "assets/images/daily/meme_2.jpg",
       "imageAlt": "Тут должна быть фотокарточка, но Андрей накосячил",
