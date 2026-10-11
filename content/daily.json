@@ -25,9 +25,9 @@
       "type": "text",
       "kicker": "NO. 02",
       "title": "Поздравляю!",
-      "image": "assets/images/daily/meme_3.jpg",
+      "image": null,
       "imageAlt": "Тут должна быть фотокарточка, но Андрей накосячил",
-      "text": "«Некоторые сны не заканчиваются с пробуждением»",
+      "text": null,
       "extra": null,
       "quote": null
     },
