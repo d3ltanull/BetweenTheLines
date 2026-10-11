@@ -668,6 +668,12 @@ body.fx-ripple .page {
   filter: grayscale(1) contrast(1.08);
 }
 
+.scene-card__media video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .scene-card__notes {
   font-size: 0.95rem;
   color: #5a5449;

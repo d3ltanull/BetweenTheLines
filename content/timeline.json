@@ -52,11 +52,11 @@
       "time": "20:35",
       "title": "«ЕСТЬ КОНТАКТ!»",
       "location": "Кинотеатр",
-      "description": "Первый разговор. Все полтора часа и даже после, уже перед сном, твой образ не выходил у меня из головы. Немного волнительно. Сидел и что-то параллельно калякал ручкой на листке, одновременно улыбаясь.",
+      "description": "",
       "quote": null,
       "voiceOver": null,
       "notes": null,
-      "image": "assets/images/timeline/event_4.jpg",
+      "video": "assets/video/video_1.mov",
       "imageAlt": "[ОПИСАНИЕ КАДРА]",
       "metadata": null
     }
