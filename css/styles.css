@@ -642,6 +642,7 @@ body.fx-ripple .page {
   font-family: var(--font-display);
   font-style: italic;
   font-size: 1.22rem;
+  white-space: pre-line;
 }
 
 .scene-card__vo {
