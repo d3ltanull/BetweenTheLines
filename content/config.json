@@ -5,13 +5,12 @@
   "timezone": "Europe/Moscow",
   "titleCard": {
     "fadeIn": "FADE IN",
-    "reelLabel": "REEL 001",
-    "sceneLabel": "SCENE 01",
-    "tagline": "A FILM IN PROGRESS",
+    "sceneLabel": "СЦЕНА 01",
+    "tagline": "ЧАСТЬ ПЕРВАЯ",
     "name": "„О КРАСОТЕ. О ВСТРЕЧАХ. О ТОМ, ЧТО ОСТАЕТСЯ МЕЖДУ СТРОК.“",
     "subtitle": "ПЛАТОН, «ПИР»",
     "phrase": "*рекомендуется включить звуковое сопровождение",
-    "technical": "35MM  •  B/W  •  WORK PRINT"
+    "technical": "35MM  •  Ч/Б"
   },
   "copy": {
     "dailyTitle": "КАДР ДНЯ",
