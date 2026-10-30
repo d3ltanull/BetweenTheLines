@@ -802,7 +802,7 @@ body.fx-ripple .page {
 }
 
 .will-reveal.is-visible {
-  animation: reveal 1.35s ease forwards;
+  animation: reveal 3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 /* Animations */

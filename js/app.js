@@ -582,25 +582,45 @@
     }
   }
 
-  function initReveals(config) {
-    if (!config.features.scrollReveal) return;
-    if (window.matchMedia("(max-width: 900px)").matches) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const nodes = document.querySelectorAll(".chapter, .end-card, .scene");
-    nodes.forEach((node) => node.classList.add("will-reveal"));
-    const io = new IntersectionObserver(
+  
+function initReveals(config) {
+  if (!config.features.scrollReveal) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const nodes = document.querySelectorAll(".chapter, .end-card, .scene");
+
+  if (!("IntersectionObserver" in window)) return;
+
+  let observer;
+
+  try {
+    observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
-            io.unobserve(entry.target);
+            observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+      {
+        threshold: 0.01,
+        rootMargin: "0px 0px -20% 0px"
+      }
     );
-    nodes.forEach((node) => io.observe(node));
+
+    nodes.forEach((node) => {
+      node.classList.add("will-reveal");
+      observer.observe(node);
+    });
+  } catch (error) {
+    if (observer) observer.disconnect();
+    nodes.forEach((node) => {
+      node.classList.remove("will-reveal", "is-visible");
+    });
   }
+}
+
 
   function deepMerge(base, extra) {
     if (!extra || typeof extra !== "object") return base;
