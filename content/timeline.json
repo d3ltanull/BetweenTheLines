@@ -119,6 +119,21 @@
       "image": "assets/images/timeline/event_8.jpg",
       "imageAlt": "[ОПИСАНИЕ КАДРА]",
       "metadata": null
+    },
+    {
+      "id": "сцена-09",
+      "number": 9,
+      "date": "2026-10-26",
+      "time": "21:37",
+      "title": "«...ЛЮБОВЬ»",
+      "location": "Двор твоего дома",
+      "description": "",
+      "quote": null,
+      "voiceOver": null,
+      "notes": "*",
+      "image": "",
+      "imageAlt": "[ОПИСАНИЕ КАДРА]",
+      "metadata": null
     }
   ]
 }
