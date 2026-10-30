@@ -371,16 +371,35 @@
     location.textContent = textOr(scene.location, "[МЕСТО]");
     card.appendChild(location);
     
-    if (Object.prototype.hasOwnProperty.call(scene, "image")) {
-  const media = document.createElement("figure");
-  media.className = "scene-card__media";
+    if (scene.video || Object.prototype.hasOwnProperty.call(scene, "image")) {
+      const media = document.createElement("figure");
+      media.className = "scene-card__media";
 
-      bindImg(
-        media,
-        scene.image,
-        scene.imageAlt,
-        config.copy.missingImage
-      );
+      if (scene.video) {
+        const video = document.createElement("video");
+        video.muted = true;
+        video.defaultMuted = true;
+        video.volume = 0;
+        video.autoplay = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.preload = "metadata";
+        video.setAttribute("aria-label", textOr(scene.imageAlt, "Видео сцены"));
+
+        const source = document.createElement("source");
+        source.src = scene.video;
+        source.type = "video/mp4";
+
+        video.appendChild(source);
+        media.appendChild(video);
+      } else {
+        bindImg(
+          media,
+          scene.image,
+          scene.imageAlt,
+          config.copy.missingImage
+        );
+      }
 
       card.appendChild(media);
     }
@@ -565,6 +584,7 @@
 
   function initReveals(config) {
     if (!config.features.scrollReveal) return;
+    if (window.matchMedia("(max-width: 900px)").matches) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const nodes = document.querySelectorAll(".chapter, .end-card, .scene");
     nodes.forEach((node) => node.classList.add("will-reveal"));
