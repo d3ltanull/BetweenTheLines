@@ -120,11 +120,15 @@
       <p class="slate-modal__lead">Заявка уйдет в архив и появится на сайте только после утверждения</p>
       <form class="slate-form" id="daily-submit-form">
         <label class="slate-form__field">
+          <span class="type-tech">Дата публикации</span>
+          <input id="daily-date" name="date" type="date" required autocomplete="off" placeholder="ГГГГ-ММ-ДД">
+        </label>
+        <label class="slate-form__field">
           <span class="type-tech">Название</span>
           <input id="daily-title" name="title" type="text" required maxlength="160" autocomplete="off">
         </label>
         <label class="slate-form__field">
-          <span class="type-tech">Прикрепить кадр</span>
+          <span class="type-tech">Прикрепить кадр (изображение)</span>
           <input id="daily-image" name="image" type="file" accept="image/*" required>
         </label>
         <label class="slate-form__field">
@@ -140,8 +144,8 @@
   </div>
 
   <div class="slate-notice is-hidden" id="slate-notice" role="status" aria-live="polite" hidden>
-    <p class="type-tech slate-notice__mark">TAKE SUBMITTED</p>
-    <p class="slate-notice__text" id="slate-notice-text">Новый кадр отправлен в архив и ждёт утверждения</p>
+    <p class="type-tech slate-notice__mark">ПОЗДРАВЛЯЮ!</p>
+    <p class="slate-notice__text" id="slate-notice-text">Новый кадр отправлен в архив и ждет утверждения</p>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

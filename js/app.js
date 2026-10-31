@@ -626,7 +626,7 @@
       const file = imageInput?.files ? imageInput.files[0] : null;
 
       if (!dateVal || !titleVal || !textVal || !file) {
-        showSlateNotice("Неполный дубль. Заполните дату, название, текст и прикрепите кадр.");
+        showSlateNotice("Неполный дубль. Заполни дату, название, текст и прикрепи кадр.");
         return;
       }
 
@@ -644,7 +644,7 @@
           .upload(fileName, file, { cacheControl: "3600", upsert: false });
 
         if (uploadError) {
-          showSlateNotice("Ошибка при загрузке кадра в хранилище.");
+          showSlateNotice("Ошибка при загрузке кадра в хранилище");
           return;
         }
 
@@ -665,14 +665,14 @@
         const { error: insertError } = await client.from("daily").insert([payload]);
 
         if (insertError) {
-          showSlateNotice("Плёнка застряла в камере. Попробуйте сдать кадр ещё раз.");
+          showSlateNotice("Пленка застряла в камере. Попробуй сдать кадр еще раз");
           return;
         }
 
         closeModal();
-        showSlateNotice("Новый кадр отправлен в архив и ждёт утверждения");
+        showSlateNotice("Новый кадр отправлен в архив и ждет утверждения!");
       } catch {
-        showSlateNotice("Плёнка застряла в камере. Попробуйте сдать кадр ещё раз.");
+        showSlateNotice("Пленка застряла в камере. Попробуй сдать кадр еще раз.");
       } finally {
         if (sendBtn) {
           sendBtn.disabled = false;
