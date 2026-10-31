@@ -116,21 +116,16 @@
       id="daily-modal-panel"
       tabindex="-1"
     >
-      <p class="type-tech slate-modal__mark">INSERT FRAME</p>
       <h2 class="slate-modal__title" id="daily-modal-title">Новый кадр дня</h2>
-      <p class="slate-modal__lead">Заявка уйдёт в архив и появится на экране только после утверждения.</p>
+      <p class="slate-modal__lead">Заявка уйдет в архив и появится на сайте только после утверждения</p>
       <form class="slate-form" id="daily-submit-form">
-        <label class="slate-form__field">
-          <span class="type-tech">Дата публикации</span>
-          <input id="daily-date" name="date" type="date" required autocomplete="off" placeholder="ГГГГ-ММ-ДД">
-        </label>
         <label class="slate-form__field">
           <span class="type-tech">Название</span>
           <input id="daily-title" name="title" type="text" required maxlength="160" autocomplete="off">
         </label>
         <label class="slate-form__field">
-          <span class="type-tech">Изображение</span>
-          <input id="daily-image" name="image" type="text" maxlength="500" autocomplete="off" placeholder="ссылка или путь к кадру">
+          <span class="type-tech">Прикрепить кадр</span>
+          <input id="daily-image" name="image" type="file" accept="image/*" required>
         </label>
         <label class="slate-form__field">
           <span class="type-tech">Пометка / Текст</span>

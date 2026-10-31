@@ -585,6 +585,7 @@
     const cancelBtn = $("daily-submit-cancel");
     const veil = $("daily-modal-veil");
     const dateInput = $("daily-date");
+    const imageInput = $("daily-image");
     const sendBtn = $("daily-submit-send");
     if (!modal || !form || !openBtn) return;
 
@@ -619,34 +620,64 @@
         return;
       }
 
-      const payload = {
-        date: String(form.date.value || "").trim(),
-        title: String(form.title.value || "").trim(),
-        image: String(form.image.value || "").trim() || null,
-        text: String(form.text.value || "").trim(),
-        type: "text",
-        kicker: "NEW FRAME",
-        approved: false
-      };
+      const dateVal = String(form.date.value || "").trim();
+      const titleVal = String(form.title.value || "").trim();
+      const textVal = String(form.text.value || "").trim();
+      const file = imageInput?.files ? imageInput.files[0] : null;
 
-      if (!payload.date || !payload.title || !payload.text) {
-        showSlateNotice("Неполный дубль. Заполните дату, название и текст.");
+      if (!dateVal || !titleVal || !textVal || !file) {
+        showSlateNotice("Неполный дубль. Заполните дату, название, текст и прикрепите кадр.");
         return;
       }
 
-      if (sendBtn) sendBtn.disabled = true;
+      if (sendBtn) {
+        sendBtn.disabled = true;
+        sendBtn.textContent = "ПРОЯВКА КАДРА...";
+      }
+
       try {
-        const { error } = await client.from("daily").insert([payload]);
-        if (error) {
+        const fileExt = file.name.split(".").pop();
+        const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
+
+        const { error: uploadError } = await client.storage
+          .from("daily-images")
+          .upload(fileName, file, { cacheControl: "3600", upsert: false });
+
+        if (uploadError) {
+          showSlateNotice("Ошибка при загрузке кадра в хранилище.");
+          return;
+        }
+
+        const { data: publicUrlData } = client.storage
+          .from("daily-images")
+          .getPublicUrl(fileName);
+
+        const payload = {
+          date: dateVal,
+          title: titleVal,
+          image: publicUrlData.publicUrl,
+          text: textVal,
+          type: "image",
+          kicker: "NEW FRAME",
+          approved: false
+        };
+
+        const { error: insertError } = await client.from("daily").insert([payload]);
+
+        if (insertError) {
           showSlateNotice("Плёнка застряла в камере. Попробуйте сдать кадр ещё раз.");
           return;
         }
+
         closeModal();
         showSlateNotice("Новый кадр отправлен в архив и ждёт утверждения");
       } catch {
         showSlateNotice("Плёнка застряла в камере. Попробуйте сдать кадр ещё раз.");
       } finally {
-        if (sendBtn) sendBtn.disabled = false;
+        if (sendBtn) {
+          sendBtn.disabled = false;
+          sendBtn.textContent = "СДАТЬ В АРХИВ";
+        }
       }
     });
   }
