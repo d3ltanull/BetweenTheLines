@@ -61,6 +61,11 @@
         <article class="daily__frame" id="daily-frame">
           <p class="placeholder">[КАДР ДНЯ]</p>
         </article>
+        <p class="daily__action">
+          <button class="slate-trigger" id="daily-submit-open" type="button">
+            ПРЕДЛОЖИТЬ КАДР
+          </button>
+        </p>
       </section>
 
       <section class="chapter film" id="film" aria-labelledby="film-heading">
@@ -101,6 +106,50 @@
     </footer>
   </div>
 
+  <div class="slate-modal is-hidden" id="daily-modal" hidden>
+    <div class="slate-modal__veil" id="daily-modal-veil"></div>
+    <div
+      class="slate-modal__panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="daily-modal-title"
+      id="daily-modal-panel"
+      tabindex="-1"
+    >
+      <p class="type-tech slate-modal__mark">INSERT FRAME</p>
+      <h2 class="slate-modal__title" id="daily-modal-title">Новый кадр дня</h2>
+      <p class="slate-modal__lead">Заявка уйдёт в архив и появится на экране только после утверждения.</p>
+      <form class="slate-form" id="daily-submit-form">
+        <label class="slate-form__field">
+          <span class="type-tech">Дата публикации</span>
+          <input id="daily-date" name="date" type="date" required autocomplete="off" placeholder="ГГГГ-ММ-ДД">
+        </label>
+        <label class="slate-form__field">
+          <span class="type-tech">Название</span>
+          <input id="daily-title" name="title" type="text" required maxlength="160" autocomplete="off">
+        </label>
+        <label class="slate-form__field">
+          <span class="type-tech">Изображение</span>
+          <input id="daily-image" name="image" type="text" maxlength="500" autocomplete="off" placeholder="ссылка или путь к кадру">
+        </label>
+        <label class="slate-form__field">
+          <span class="type-tech">Пометка / Текст</span>
+          <textarea id="daily-text" name="text" required maxlength="2000" rows="5"></textarea>
+        </label>
+        <div class="slate-form__actions">
+          <button class="slate-btn slate-btn--ghost" id="daily-submit-cancel" type="button">ОТМЕНА</button>
+          <button class="slate-btn" id="daily-submit-send" type="submit">СДАТЬ В АРХИВ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="slate-notice is-hidden" id="slate-notice" role="status" aria-live="polite" hidden>
+    <p class="type-tech slate-notice__mark">TAKE SUBMITTED</p>
+    <p class="slate-notice__text" id="slate-notice-text">Новый кадр отправлен в архив и ждёт утверждения</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/app.js" defer></script>
 </body>
 </html>

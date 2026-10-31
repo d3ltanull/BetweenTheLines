@@ -55,6 +55,8 @@
 
   const SOUND_KEY = "btl-sound";
   const MISSING_FRAME = "assets/images/decorative/missing-frame.svg";
+  const SUPABASE_URL = "https://wnexlkpryzinaksuosir.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_0g1GD5JLg3hPyD6ibd9YZQ_kttgRLDq";
 
   const $ = (id) => document.getElementById(id);
 
@@ -155,6 +157,39 @@
     const match = entries.find((entry) => entry && entry.date === isoDate);
     if (match) return match;
     return (bundle && bundle.default) || {};
+  }
+
+  function createSupabaseClient() {
+    if (!window.supabase || typeof window.supabase.createClient !== "function") return null;
+    return window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  }
+
+  function mergeDaily(localDaily, remoteRows) {
+    const bundle = {
+      default: (localDaily && localDaily.default) || {},
+      entries: Array.isArray(localDaily && localDaily.entries) ? [...localDaily.entries] : []
+    };
+    const byDate = new Map();
+    bundle.entries.forEach((entry) => {
+      if (entry && entry.date) byDate.set(String(entry.date), entry);
+    });
+    (Array.isArray(remoteRows) ? remoteRows : []).forEach((row) => {
+      if (!row || !row.date) return;
+      byDate.set(String(row.date), row);
+    });
+    bundle.entries = Array.from(byDate.values());
+    return bundle;
+  }
+
+  async function loadApprovedDaily(client) {
+    if (!client) return [];
+    try {
+      const { data, error } = await client.from("daily").select("*").eq("approved", true);
+      if (error || !Array.isArray(data)) return [];
+      return data;
+    } catch {
+      return [];
+    }
   }
 
   function applyEffects(config) {
@@ -528,6 +563,94 @@
     window.setInterval(tick, 1000);
   }
 
+  function showSlateNotice(message) {
+    const notice = $("slate-notice");
+    const text = $("slate-notice-text");
+    if (!notice || !text) return;
+    text.textContent = message;
+    notice.hidden = false;
+    notice.classList.remove("is-hidden");
+    window.clearTimeout(showSlateNotice.timer);
+    showSlateNotice.timer = window.setTimeout(() => {
+      notice.hidden = true;
+      notice.classList.add("is-hidden");
+    }, 4200);
+  }
+
+  function initDailySubmit(config, client) {
+    const modal = $("daily-modal");
+    const panel = $("daily-modal-panel");
+    const form = $("daily-submit-form");
+    const openBtn = $("daily-submit-open");
+    const cancelBtn = $("daily-submit-cancel");
+    const veil = $("daily-modal-veil");
+    const dateInput = $("daily-date");
+    const sendBtn = $("daily-submit-send");
+    if (!modal || !form || !openBtn) return;
+
+    let lastFocus = null;
+
+    const openModal = () => {
+      lastFocus = document.activeElement;
+      modal.hidden = false;
+      modal.classList.remove("is-hidden");
+      if (dateInput && !dateInput.value) dateInput.value = todayInZone(config.timezone);
+      (dateInput || panel).focus();
+    };
+
+    const closeModal = () => {
+      modal.hidden = true;
+      modal.classList.add("is-hidden");
+      form.reset();
+      if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+    };
+
+    openBtn.addEventListener("click", openModal);
+    cancelBtn?.addEventListener("click", closeModal);
+    veil?.addEventListener("click", closeModal);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !modal.hidden) closeModal();
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!client) {
+        showSlateNotice("Архив сейчас недоступен. Кадр не удалось сдать.");
+        return;
+      }
+
+      const payload = {
+        date: String(form.date.value || "").trim(),
+        title: String(form.title.value || "").trim(),
+        image: String(form.image.value || "").trim() || null,
+        text: String(form.text.value || "").trim(),
+        type: "text",
+        kicker: "NEW FRAME",
+        approved: false
+      };
+
+      if (!payload.date || !payload.title || !payload.text) {
+        showSlateNotice("Неполный дубль. Заполните дату, название и текст.");
+        return;
+      }
+
+      if (sendBtn) sendBtn.disabled = true;
+      try {
+        const { error } = await client.from("daily").insert([payload]);
+        if (error) {
+          showSlateNotice("Плёнка застряла в камере. Попробуйте сдать кадр ещё раз.");
+          return;
+        }
+        closeModal();
+        showSlateNotice("Новый кадр отправлен в архив и ждёт утверждения");
+      } catch {
+        showSlateNotice("Плёнка застряла в камере. Попробуйте сдать кадр ещё раз.");
+      } finally {
+        if (sendBtn) sendBtn.disabled = false;
+      }
+    });
+  }
+
   function initAudio(config) {
     const btn = $("sound-toggle");
     const audio = $("score");
@@ -650,14 +773,23 @@ function initReveals(config) {
     ]);
 
     const config = deepMerge(FALLBACK_CONFIG, configRaw || {});
+    const localDaily = daily || { default: {} };
+    const supabaseClient = createSupabaseClient();
+
     applyEffects(config);
     bindTitle(config);
     renderGreeting(config, greetings || { default: {} });
-    renderDaily(config, daily || { default: {} });
+    renderDaily(config, localDaily);
     renderTimeline(config, timeline || { scenes: [] });
     startCounter(config);
     initAudio(config);
     initReveals(config);
+    initDailySubmit(config, supabaseClient);
+
+    const approved = await loadApprovedDaily(supabaseClient);
+    if (approved.length) {
+      renderDaily(config, mergeDaily(localDaily, approved));
+    }
   }
 
   if (typeof window !== "undefined") {
