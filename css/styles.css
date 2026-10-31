@@ -987,10 +987,12 @@ body.fx-ripple .page {
 .slate-modal {
   position: fixed;
   inset: 0;
-  z-index: 5;
-  display: grid;
-  place-items: center;
-  padding: calc(var(--reel-height) + 1.2rem) var(--page-pad);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.8rem, 2vw, 1.5rem);
+  overflow: hidden;
 }
 
 .slate-modal__veil {
@@ -1002,14 +1004,16 @@ body.fx-ripple .page {
 .slate-modal__panel {
   position: relative;
   z-index: 1;
+  box-sizing: border-box;
   width: min(100%, 32rem);
-  max-height: calc(100svh - 4.5rem);
-  overflow: auto;
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* Плавный скролл на iOS */
   background:
     linear-gradient(180deg, rgba(255,255,255,0.03), transparent 18%),
     #141311;
   border: 1px solid var(--hairline);
-  padding: clamp(1.2rem, 3vw, 2.2rem);
+  padding: clamp(1rem, 3vw, 1.8rem);
 }
 
 .slate-modal__mark {
@@ -1039,14 +1043,23 @@ body.fx-ripple .page {
 
 .slate-form__field input,
 .slate-form__field textarea {
+  box-sizing: border-box;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   border: 1px solid var(--hairline);
   background: #0a0a09;
   color: var(--paper);
   font-family: var(--font-body);
-  font-size: 1.05rem;
+  font-size: 1rem;
   padding: 0.65rem 0.8rem;
   color-scheme: dark;
+}
+
+.slate-form__field input[type="date"] {
+  -webkit-appearance: none;
+  appearance: none;
+  min-height: 2.75rem;
 }
 
 .slate-form__field textarea {
