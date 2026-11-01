@@ -657,7 +657,7 @@
 
       // Проверка обязательных полей
       if (!titleVal || !dateVal || !timeVal || !locVal || !descVal || !file) {
-        showSlateNotice("Заполните все обязательные поля кадра.");
+        showSlateNotice("Заполни все обязательные поля кадра.");
         return;
       }
 
@@ -704,15 +704,15 @@
 
         if (insertError) {
           console.error("Database insert error:", insertError);
-          showSlateNotice("Плёнка застряла в камере. Попробуйте ещё раз.");
+          showSlateNotice("Пленка застряла в камере. Попробуй ещё раз.");
           return;
         }
 
         closeModal();
-        showSlateNotice("Новый кадр хроники отправлен и ждёт утверждения");
+        showSlateNotice("Новый кадр хроники отправлен и ждет утверждения");
       } catch (err) {
         console.error("Unexpected submission error:", err);
-        showSlateNotice("Плёнка застряла в камере. Попробуйте ещё раз.");
+        showSlateNotice("Пленка застряла в камере. Попробуй еще раз.");
       } finally {
         if (sendBtn) {
           sendBtn.disabled = false;
