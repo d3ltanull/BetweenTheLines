@@ -150,5 +150,51 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/app.js" defer></script>
+
+  <div class="slate-modal is-hidden" id="timeline-modal" hidden>
+  <div class="slate-modal__veil" id="timeline-modal-veil"></div>
+  <div class="slate-modal__panel" role="dialog" aria-modal="true" aria-labelledby="timeline-modal-title" id="timeline-modal-panel" tabindex="-1">
+    <h2 class="slate-modal__title" id="timeline-modal-title">Новая сцена</h2>
+    <p class="slate-modal__lead">Заявка уйдет в архив и появится в хронике после утверждения</p>
+    <form class="slate-form" id="timeline-submit-form">
+      <label class="slate-form__field">
+        <span class="type-tech">Название кадра</span>
+        <input id="timeline-title" name="title" type="text" required maxlength="160" autocomplete="off">
+      </label>
+      <label class="slate-form__field">
+        <span class="type-tech">Дата</span>
+        <input id="timeline-date" name="date" type="date" required autocomplete="off">
+      </label>
+      <label class="slate-form__field">
+        <span class="type-tech">Время</span>
+        <input id="timeline-time" name="time" type="text" required placeholder="18:00" autocomplete="off">
+      </label>
+      <label class="slate-form__field">
+        <span class="type-tech">Локация</span>
+        <input id="timeline-location" name="location" type="text" required maxlength="160" autocomplete="off">
+      </label>
+      <label class="slate-form__field">
+        <span class="type-tech">Описание</span>
+        <textarea id="timeline-description" name="description" required maxlength="2000" rows="4"></textarea>
+      </label>
+      <label class="slate-form__field">
+        <span class="type-tech">Изображение</span>
+        <input id="timeline-image" name="image" type="file" accept="image/*" required>
+      </label>
+      <label class="slate-form__field">
+        <span class="type-tech">Цитата (необязательно)</span>
+        <textarea id="timeline-quote" name="quote" maxlength="1000" rows="2"></textarea>
+      </label>
+      <label class="slate-form__field">
+        <span class="type-tech">Заметка (необязательно)</span>
+        <input id="timeline-notes" name="notes" type="text" maxlength="500" autocomplete="off">
+      </label>
+      <div class="slate-form__actions">
+        <button class="slate-btn slate-btn--ghost" id="timeline-submit-cancel" type="button">ОТМЕНА</button>
+        <button class="slate-btn" id="timeline-submit-send" type="submit">СДАТЬ В АРХИВ</button>
+      </div>
+    </form>
+  </div>
+</div>
 </body>
 </html>

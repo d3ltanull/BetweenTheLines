@@ -960,10 +960,63 @@ body.fx-ripple .page {
   }
 }
 
-/* Daily submit — new surfaces only */
 .daily__action {
   margin-top: 1.15rem;
   text-align: center;
+}
+
+
+.timeline-trigger-card {
+  display: block;
+  width: 100%;
+  padding: clamp(1.2rem, 3vw, 1.8rem);
+  border: 1px dashed #5d584e;
+  
+  background-color: #dcd3c1;
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.18'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, rgba(255,255,255,0.18), transparent 30%);
+  
+  color: #1c1a16;
+  text-align: left;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+  transform: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.timeline-trigger-card:hover,
+.timeline-trigger-card:focus-visible {
+  transform: rotate(0deg) translateY(-2px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.38);
+  border-color: #161410;
+}
+
+.timeline-trigger-card__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-tech);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #5d584e;
+}
+
+.timeline-trigger-card__title {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 500;
+  color: #161410;
+  line-height: 1.1;
+}
+
+.timeline-trigger-card__sub {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #5a5449;
 }
 
 .slate-trigger {

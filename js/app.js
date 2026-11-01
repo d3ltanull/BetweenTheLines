@@ -505,14 +505,33 @@
     return li;
   }
 
+  function renderActionCard() {
+    const li = document.createElement("li");
+    li.className = "scene scene--action";
+    li.innerHTML = `
+      <button class="timeline-trigger-card" id="timeline-submit-open" type="button">
+        <h3 class="timeline-trigger-card__title">ДОБАВИТЬ СВОЙ КАДР В ХРОНИКУ</h3>
+        <p class="timeline-trigger-card__sub">Нажмите, чтобы вписать новую сцену в историю</p>
+      </button>
+    `;
+    return li;
+  }
+
   function renderTimeline(config, timeline) {
     const host = $("timeline");
     host.innerHTML = "";
     const scenes = Array.isArray(timeline && timeline.scenes) ? [...timeline.scenes] : [];
     scenes.sort((a, b) => sceneInstant(a, config.timezone) - sceneInstant(b, config.timezone));
+    
+    // 1. Отрисовываем все текущие сцены
     scenes.forEach((scene, index) => {
       host.appendChild(renderScene(scene || {}, index, config));
     });
+
+    // 2. Вставляем кнопку добавления сцены
+    host.appendChild(renderActionCard());
+
+    // 3. Вставляем плашку "ЕЩЁ НЕ СНЯТО" в самом конце
     if (config.features.unshotScene) {
       host.appendChild(renderUnshot(config));
     }
@@ -577,6 +596,132 @@
     }, 4200);
   }
 
+  function initTimelineSubmit(config, client) {
+    const modal = $("timeline-modal");
+    const panel = $("timeline-modal-panel");
+    const form = $("timeline-submit-form");
+    const cancelBtn = $("timeline-submit-cancel");
+    const veil = $("timeline-modal-veil");
+    const dateInput = $("timeline-date");
+    const imageInput = $("timeline-image");
+    const sendBtn = $("timeline-submit-send");
+
+    // Делегирование клика для динамически создаваемой кнопки в хронологии
+    document.addEventListener("click", (e) => {
+      const openBtn = e.target.closest("#timeline-submit-open");
+      if (openBtn) {
+        openModal();
+      }
+    });
+
+    if (!modal || !form) return;
+
+    let lastFocus = null;
+
+    const openModal = () => {
+      lastFocus = document.activeElement;
+      modal.hidden = false;
+      modal.classList.remove("is-hidden");
+      if (dateInput && !dateInput.value) dateInput.value = todayInZone(config.timezone);
+      (dateInput || panel).focus();
+    };
+
+    const closeModal = () => {
+      modal.hidden = true;
+      modal.classList.add("is-hidden");
+      form.reset();
+      if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+    };
+
+    cancelBtn?.addEventListener("click", closeModal);
+    veil?.addEventListener("click", closeModal);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !modal.hidden) closeModal();
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!client) {
+        showSlateNotice("Архив сейчас недоступен.");
+        return;
+      }
+
+      const titleVal = String(form.title ? form.title.value : "").trim();
+      const dateVal = String(form.date ? form.date.value : "").trim();
+      const timeVal = String(form.time ? form.time.value : "").trim();
+      const locVal = String(form.location ? form.location.value : "").trim();
+      const descVal = String(form.description ? form.description.value : "").trim();
+      const quoteVal = String(form.quote ? form.quote.value : "").trim();
+      const notesVal = String(form.notes ? form.notes.value : "").trim();
+      const file = imageInput?.files ? imageInput.files[0] : null;
+
+      // Проверка обязательных полей
+      if (!titleVal || !dateVal || !timeVal || !locVal || !descVal || !file) {
+        showSlateNotice("Заполните все обязательные поля кадра.");
+        return;
+      }
+
+      if (sendBtn) {
+        sendBtn.disabled = true;
+        sendBtn.textContent = "ПРОЯВКА КАДРА...";
+      }
+
+      try {
+        // 1. Загрузка файла в Supabase Storage (timeline-media)
+        const fileExt = file.name.split(".").pop();
+        const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
+
+        const { error: uploadError } = await client.storage
+          .from("timeline-media")
+          .upload(fileName, file, { cacheControl: "3600", upsert: false });
+
+        if (uploadError) {
+          console.error("Storage upload error:", uploadError);
+          showSlateNotice("Ошибка при загрузке кадра в хранилище.");
+          return;
+        }
+
+        // 2. Получение публичного URL файла
+        const { data: publicUrlData } = client.storage
+          .from("timeline-media")
+          .getPublicUrl(fileName);
+
+        // 3. Формирование объекта данных с гарантией типов
+        const payload = {
+          title: titleVal,
+          date: dateVal,
+          time: timeVal,
+          location: locVal,
+          description: descVal,
+          image: publicUrlData.publicUrl,
+          quote: quoteVal ? quoteVal : null,
+          notes: notesVal ? notesVal : null,
+          approved: false
+        };
+
+        // 4. Отправка записи в таблицу timeline
+        const { error: insertError } = await client.from("timeline").insert([payload]);
+
+        if (insertError) {
+          console.error("Database insert error:", insertError);
+          showSlateNotice("Плёнка застряла в камере. Попробуйте ещё раз.");
+          return;
+        }
+
+        closeModal();
+        showSlateNotice("Новый кадр хроники отправлен и ждёт утверждения");
+      } catch (err) {
+        console.error("Unexpected submission error:", err);
+        showSlateNotice("Плёнка застряла в камере. Попробуйте ещё раз.");
+      } finally {
+        if (sendBtn) {
+          sendBtn.disabled = false;
+          sendBtn.textContent = "СДАТЬ В АРХИВ";
+        }
+      }
+    });
+  }
+  
   function initDailySubmit(config, client) {
     const modal = $("daily-modal");
     const panel = $("daily-modal-panel");
@@ -795,6 +940,23 @@ function initReveals(config) {
     return out;
   }
 
+  async function loadApprovedTimeline(client) {
+    if (!client) return [];
+    try {
+      const { data, error } = await client.from("timeline").select("*").eq("approved", true);
+      if (error || !Array.isArray(data)) return [];
+      return data;
+    } catch {
+      return [];
+    }
+  }
+
+  function mergeTimeline(localTimeline, remoteRows) {
+    const localScenes = Array.isArray(localTimeline && localTimeline.scenes) ? [...localTimeline.scenes] : [];
+    const combined = [...localScenes, ...(Array.isArray(remoteRows) ? remoteRows : [])];
+    return { scenes: combined };
+  }
+
   async function boot() {
     const [configRaw, greetings, daily, timeline] = await Promise.all([
       loadJSON("content/config.json"),
@@ -816,6 +978,12 @@ function initReveals(config) {
     initAudio(config);
     initReveals(config);
     initDailySubmit(config, supabaseClient);
+    initTimelineSubmit(config, supabaseClient);
+
+    const approvedTimeline = await loadApprovedTimeline(supabaseClient);
+    if (approvedTimeline.length) {
+      renderTimeline(config, mergeTimeline(timeline || { scenes: [] }, approvedTimeline));
+    }
 
     const approved = await loadApprovedDaily(supabaseClient);
     if (approved.length) {
