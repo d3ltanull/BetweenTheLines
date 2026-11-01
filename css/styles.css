@@ -968,20 +968,22 @@ body.fx-ripple .page {
 
 .slate-trigger {
   border: 1px solid var(--hairline);
-  background: transparent;
-  color: var(--silver);
+  background: var(--paper);
+  color: var(--ink);
   padding: 0.55rem 0.9rem;
   letter-spacing: 0.16em;
   font-family: var(--font-tech);
   font-size: 0.68rem;
   text-transform: uppercase;
   cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .slate-trigger:hover,
 .slate-trigger:focus-visible {
-  border-color: var(--paper);
-  color: var(--paper);
+  background: var(--paper-deep);
+  border-color: var(--paper-deep);
+  color: var(--ink);
 }
 
 .slate-modal {
