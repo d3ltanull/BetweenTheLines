@@ -370,6 +370,97 @@
     if (entry.type === "quiz" || entry.quiz) {
       renderQuiz(frame, entry.quiz, config.copy);
     }
+
+    if (entry.audio && entry.audio.src) {
+      const playerWrap = document.createElement("div");
+      playerWrap.className = "daily-player";
+      playerWrap.innerHTML = `
+        <div class="daily-player__sprockets daily-player__sprockets--top"></div>
+        <div class="daily-player__header">
+          <span class="daily-player__tag type-tech">ЗВУКОВАЯ ДОРОЖКА</span>
+          <span class="daily-player-time">0:00</span>
+        </div>
+        <div class="daily-player-info">
+          <span class="daily-player-title">${entry.audio.title || "ТРЕК ДНЯ"}</span>
+          <span class="daily-player-artist">${entry.audio.artist || ""}</span>
+        </div>
+        <div class="daily-player-controls">
+          <button class="daily-play-btn" type="button" aria-label="Play">
+            <svg class="play-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+          <div class="daily-progress-container">
+            <div class="daily-progress-bar"></div>
+          </div>
+        </div>
+        <audio src="${entry.audio.src}" preload="metadata"></audio>
+      `;
+      frame.appendChild(playerWrap);
+    }
+  }
+
+  function initDailyAudioPlayers() {
+    document.querySelectorAll(".daily-player").forEach((playerEl) => {
+      const audio = playerEl.querySelector("audio");
+      const playBtn = playerEl.querySelector(".daily-play-btn");
+      const playIcon = playerEl.querySelector(".play-icon");
+      const pauseIcon = playerEl.querySelector(".pause-icon");
+      const progressContainer = playerEl.querySelector(".daily-progress-container");
+      const progressBar = playerEl.querySelector(".daily-progress-bar");
+      const timeEl = playerEl.querySelector(".daily-player-time");
+
+      if (!audio || !playBtn) return;
+
+      playBtn.addEventListener("click", () => {
+        if (audio.paused) {
+          document.querySelectorAll("audio").forEach((a) => {
+            if (a !== audio) {
+              a.pause();
+              a.dispatchEvent(new Event("pause"));
+            }
+          });
+          audio.play();
+        } else {
+          audio.pause();
+        }
+      });
+
+      audio.addEventListener("play", () => {
+        playIcon.style.display = "none";
+        pauseIcon.style.display = "block";
+      });
+
+      audio.addEventListener("pause", () => {
+        playIcon.style.display = "block";
+        pauseIcon.style.display = "none";
+      });
+
+      audio.addEventListener("timeupdate", () => {
+        if (!audio.duration) return;
+        const pct = (audio.currentTime / audio.duration) * 100;
+        progressBar.style.width = `${pct}%`;
+
+        const mins = Math.floor(audio.currentTime / 60);
+        const secs = Math.floor(audio.currentTime % 60).toString().padStart(2, "0");
+        timeEl.textContent = `${mins}:${secs}`;
+      });
+
+      progressContainer.addEventListener("click", (e) => {
+        const rect = progressContainer.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const width = rect.width;
+        if (audio.duration) {
+          audio.currentTime = (clickX / width) * audio.duration;
+        }
+      });
+
+      audio.addEventListener("ended", () => {
+        playIcon.style.display = "block";
+        pauseIcon.style.display = "none";
+        progressBar.style.width = "0%";
+        audio.currentTime = 0;
+      });
+    });
   }
 
   function sceneNumberLabel(scene, index) {
@@ -973,6 +1064,7 @@ function initReveals(config) {
     bindTitle(config);
     renderGreeting(config, greetings || { default: {} });
     renderDaily(config, localDaily);
+    initDailyAudioPlayers();
     renderTimeline(config, timeline || { scenes: [] });
     startCounter(config);
     initAudio(config);
@@ -988,6 +1080,7 @@ function initReveals(config) {
     const approved = await loadApprovedDaily(supabaseClient);
     if (approved.length) {
       renderDaily(config, mergeDaily(localDaily, approved));
+      initDailyAudioPlayers();
     }
   }
 
